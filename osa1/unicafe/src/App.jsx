@@ -1,5 +1,21 @@
 import { useState } from 'react'
 
+const Statistics = (props) => {
+console.log(props)
+  return (
+    <div>
+    <h1>Tilastot</h1>
+    <p>hyvä {props.good}</p>
+    <p>neutraali {props.neutral}</p>
+    <p>huono {props.bad}</p>
+    <p>yhteensä {props.all}</p>
+    <p>keskiarvo {props.grade/props.all}</p>
+    <p>positiivisia {props.good/props.all*100} %</p>
+
+
+  </div>
+  )
+}
 
 const App = () => {
   const [good, setGood] = useState(0)
@@ -37,13 +53,15 @@ const App = () => {
             }>
               Huono
           </button>
-          <h1>Tilastot</h1>
-          <p>hyvä, {good}</p>
-          <p>neutraali, {neutral}</p>
-          <p>huono, {bad}</p>
-          <p>yhteensä, {all}</p>
-          <p>keskiarvo, {grade/all} </p>
-          <p>positiivisia {good/all*100} %</p>
+         
+          <Statistics 
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            all={all}
+            grade={grade}
+          />
+
       
 
         </div>

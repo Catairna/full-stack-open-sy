@@ -3,29 +3,37 @@ import { useState } from 'react'
 const Button = (props) => (
   <button onClick={props.onClick}>{props.text}</button>
 )
+
 const StatisticLine = (props) => (
-  <p>{props.text} {props.value}</p>
+  <tr>
+    <td>{props.text}</td> 
+    <td>{props.value}</td>
+  </tr>
 )
 
 const Statistics = (props) => {
-if (props.all === 0) {
-  return (
-    <h2>Palautetta ei ole annettu</h2>
-  )
-}
-  return (
-    <div>
-      <h1>Tilastot</h1>
-      
-      <StatisticLine text="Hyvä" value={props.good} />
-      <StatisticLine text="Neutraali"value={props.neutral}/>
-      <StatisticLine text="Huono" value={props.bad}/>
-      <StatisticLine text="Yhteensä" value={props.all}/>
-      <StatisticLine text="Keskiarvo" value={props.grade/props.all}/>
-      <StatisticLine text="Positiivisia" value={props.good/props.all*100 + " %"} />
+  if (props.all === 0) {
+    return (
+      <h2>Palautetta ei ole annettu</h2>
+    )
+  }
+    return (
+      <div>
+        <h1>Tilastot</h1>
 
-    </div>
-  )
+        <table>
+          <tbody>
+            <StatisticLine text="Hyvä" value={props.good} />
+            <StatisticLine text="Neutraali"value={props.neutral}/>
+            <StatisticLine text="Huono" value={props.bad}/>
+            <StatisticLine text="Yhteensä" value={props.all}/>
+            <StatisticLine text="Keskiarvo" value={props.grade/props.all}/>
+            <StatisticLine text="Positiivisia" value={props.good/props.all*100 + " %"} />
+          </tbody>
+        </table>
+
+      </div>
+    )
 }
 
 const App = () => {
@@ -38,41 +46,41 @@ const App = () => {
 
   return (
   
-        <div>
-          <h1>Anna palautetta</h1>
+    <div>
+      <h1>Anna palautetta</h1>
           
-          <Button onClick={() => {
-            setGood(good +1)
-            setAll(all + 1)
-            setGrade(grade + 1)
-            }} 
-            text="Hyvä">
-          </Button>
+      <Button onClick={() => {
+        setGood(good +1)
+        setAll(all + 1)
+        setGrade(grade + 1)
+        }} 
+        text="Hyvä">
+      </Button>
 
-          <Button onClick={() => {
-            setNeutral(neutral +1)
-            setAll(all + 1)
-            }} 
-            text="Neutraali">
-          </Button>
+      <Button onClick={() => {
+        setNeutral(neutral +1)
+        setAll(all + 1)
+        }} 
+        text="Neutraali">
+      </Button>
 
-          <Button onClick={() => {
-            setBad(bad + 1)
-            setAll(all + 1)
-            setGrade(grade - 1)
-            }} 
-            text="Huono">
-          </Button>
+      <Button onClick={() => {
+        setBad(bad + 1)
+        setAll(all + 1)
+        setGrade(grade - 1)
+        }} 
+        text="Huono">
+      </Button>
           
-          <Statistics 
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            all={all}
-            grade={grade}
-          />
+      <Statistics 
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        all={all}
+        grade={grade}
+      />
 
-        </div>
+    </div>
 
   )
 }

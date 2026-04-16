@@ -1,7 +1,11 @@
 import { useState } from 'react'
 
 const Statistics = (props) => {
-console.log(props)
+if (props.all === 0) {
+  return (
+    <h2>Palautetta ei ole annettu</h2>
+  )
+}
   return (
     <div>
     <h1>Tilastot</h1>
@@ -54,6 +58,7 @@ const App = () => {
               Huono
           </button>
          
+
           <Statistics 
             good={good}
             neutral={neutral}

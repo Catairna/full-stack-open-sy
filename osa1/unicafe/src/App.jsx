@@ -1,5 +1,12 @@
 import { useState } from 'react'
 
+const Button = (props) => (
+  <button onClick={props.onClick}>{props.text}</button>
+)
+const StatisticLine = (props) => (
+  <p>{props.text} {props.value}</p>
+)
+
 const Statistics = (props) => {
 if (props.all === 0) {
   return (
@@ -8,16 +15,16 @@ if (props.all === 0) {
 }
   return (
     <div>
-    <h1>Tilastot</h1>
-    <p>hyvä {props.good}</p>
-    <p>neutraali {props.neutral}</p>
-    <p>huono {props.bad}</p>
-    <p>yhteensä {props.all}</p>
-    <p>keskiarvo {props.grade/props.all}</p>
-    <p>positiivisia {props.good/props.all*100} %</p>
+      <h1>Tilastot</h1>
+      
+      <StatisticLine text="Hyvä" value={props.good} />
+      <StatisticLine text="Neutraali"value={props.neutral}/>
+      <StatisticLine text="Huono" value={props.bad}/>
+      <StatisticLine text="Yhteensä" value={props.all}/>
+      <StatisticLine text="Keskiarvo" value={props.grade/props.all}/>
+      <StatisticLine text="Positiivisia" value={props.good/props.all*100 + " %"} />
 
-
-  </div>
+    </div>
   )
 }
 
@@ -33,32 +40,30 @@ const App = () => {
   
         <div>
           <h1>Anna palautetta</h1>
-          <button onClick={() => {
-              setGood(good +1)
-              setAll(all + 1)
-              setGrade(grade + 1)
-              }
+          
+          <Button onClick={() => {
+            setGood(good +1)
+            setAll(all + 1)
+            setGrade(grade + 1)
+            }} 
+            text="Hyvä">
+          </Button>
 
-            }>
-            Hyvä
-          </button>
-          <button onClick={() => {
+          <Button onClick={() => {
             setNeutral(neutral +1)
             setAll(all + 1)
-          }
-        }>
-          Neutraali
-          </button>
-          <button onClick={() => {
+            }} 
+            text="Neutraali">
+          </Button>
+
+          <Button onClick={() => {
             setBad(bad + 1)
             setAll(all + 1)
             setGrade(grade - 1)
-          }
-            }>
-              Huono
-          </button>
-         
-
+            }} 
+            text="Huono">
+          </Button>
+          
           <Statistics 
             good={good}
             neutral={neutral}
@@ -67,10 +72,7 @@ const App = () => {
             grade={grade}
           />
 
-      
-
         </div>
-
 
   )
 }

@@ -14,30 +14,35 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0))
+  const maxVotes = (Math.max(...votes))
+  const indexMaxVotes = votes.indexOf(maxVotes)
   const handleVote = (index) => { 
 
     const copy = [...votes]
     copy[index] += 1 
     setVotes(copy)
+
+    console.log("suurin äänimäärä", maxVotes)
   }
   
-
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       {console.log("äänet", votes)}
+      {console.log("indeksi", indexMaxVotes)}
       <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
-      <button onClick={() =>  {
-        handleVote(selected)
-
-         }
-      }
-      >vote
+      <button onClick={() =>  {handleVote(selected)}}
+        >vote
       </button>
       <button 
         onClick={() => setSelected(Math.floor(Math.random() * anecdotes.length))}
         >next anecdote
       </button>
+
+      <h2>Anecdote with most votes</h2>
+      <p>{anecdotes[indexMaxVotes]}</p>
+      <p>has {maxVotes} votes</p>
     </div>
   )
 }
